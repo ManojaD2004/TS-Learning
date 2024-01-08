@@ -123,8 +123,8 @@ function multiplyValue(container: Container, factor: number) {
   }
 }
 
-type Fish = { swim: () => void };
-type Bird = { fly: () => void };
+type Fish = { swim: () => void; name: string };
+type Bird = { fly: () => void; name: string };
 
 function move(animal: Fish | Bird) {
   if ("swim" in animal) {
@@ -192,6 +192,7 @@ function isFish(pet: Fish | Bird): pet is Fish {
 console.log(
   isFish({
     fly() {},
+    name: "Nemo",
   })
 );
 declare function getSmallPet(): Fish | Bird;
