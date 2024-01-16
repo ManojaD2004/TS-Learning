@@ -1,134 +1,45 @@
 "use strict";
-console.log("Hello world");
-function padLeft(padding, input) {
-    // Nice way to tell function as been not implemented
-    throw new Error("Not implemented yet!");
+function isAnimal(pet) {
+    return "swim" in pet ? true : "fly" in pet ? true : "bark" in pet;
+    // return (pet as Fish).swim !== undefined;
 }
-const myObj = { ok: "hello" };
-const myObj1 = { ok: "hello" };
-function padLeft1(padding, input) {
-    if (typeof padding === "number") {
-        return " ".repeat(padding) + input;
-    }
-    return padding + input;
+let pet = getSmallPet();
+if (isAnimal(pet)) {
+    pet.swim();
 }
-console.log(padLeft1(12, "Hello"));
-const age = Symbol("age");
-let ok = "ok";
-const myObj2 = { [ok]: "Hello", [age]: 123 };
-console.log(myObj2);
-console.log(myObj2[ok]);
-console.log("See functions written here!!");
-function getUsersOnlineMessage(numUsersOnline) {
-    // 0
-    // NaN
-    // "" (the empty string)
-    // 0n (the bigint version of zero)
-    // null
-    // undefined
-    // all coerce to false, and other values get coerced to true.
-    if (numUsersOnline) {
-        return `There are ${numUsersOnline} online now!`;
-    }
-    return "Nobody's here. :(";
+else if (isAnimal(pet)) {
+    pet.fly();
 }
-function printAll(strs) {
-    if (strs && typeof strs === "object") {
-        for (const s of strs) {
-            console.log(s);
-        }
-    }
-    else if (typeof strs === "string") {
-        console.log(strs);
-    }
+else {
+    pet.bark();
 }
-function printAll1(strs) {
-    // !!!!!!!!!!!!!!!!
-    //  DON'T DO THIS!
-    //   KEEP READING
-    // "" Gives false, so you're doing no branch for "",
-    // if that is ok you can proceed
-    // !!!!!!!!!!!!!!!!
-    if (strs) {
-        if (typeof strs === "object") {
-            for (const s of strs) {
-                console.log(s);
-            }
-        }
-        else if (typeof strs === "string") {
-            console.log(strs);
-        }
+function multiply(x, y) {
+    // You can also use assert
+    assert(typeof x === "string");
+    assert(typeof y === "number");
+    return parseInt(x) * y;
+}
+const myArray = "string"; // Weird way of declaring types.
+const myObj1 = { name: "Hello" };
+const testObj = { x: 10, y: "Hello", z: true };
+function getProperty(obj, key) {
+    return obj[key];
+}
+const xValue = getProperty(testObj, "x");
+// const xValue: number
+const yValue = getProperty(testObj, "y");
+function getArea(shape) {
+    switch (shape.kind) {
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+        case "square":
+            return shape.sideLength ** 2;
+        default:
+            // Throws an Error because any type cannot to assigned to never type
+            // const _exhaustiveCheck: never = shape;
+            // return _exhaustiveCheck;
+            const _exhaustiveCheck = shape;
+            return _exhaustiveCheck;
     }
 }
-function printAll2(strs) {
-    if (strs !== null) {
-        if (typeof strs === "object") {
-            for (const s of strs) {
-                console.log(s);
-            }
-        }
-        else if (typeof strs === "string") {
-            console.log(strs);
-        }
-    }
-}
-function multiplyAll(values, factor) {
-    if (!values) {
-        return values;
-    }
-    else {
-        return values.map((x) => x * factor);
-    }
-}
-function example(x, y) {
-    if (x === y) {
-        // We can now call any 'string' method on 'x' or 'y'.
-        x.toUpperCase();
-        y.toLowerCase();
-    }
-    else {
-        console.log(x);
-        console.log(y);
-    }
-}
-function multiplyValue(container, factor) {
-    // Remove both 'null' and 'undefined' from the type.
-    if (container.value != null) {
-        console.log(container.value);
-        // Now we can safely multiply 'container.value'.
-        container.value *= factor;
-    }
-}
-function move(animal) {
-    if ("swim" in animal) {
-        return animal.swim();
-    }
-    return animal.fly();
-}
-function move1(animal) {
-    if ("swim" in animal) {
-        animal;
-    }
-    else {
-        animal;
-    }
-}
-function logValue(x) {
-    if (x instanceof Date) {
-        console.log(x.toUTCString());
-    }
-    else {
-        console.log(x.toUpperCase());
-    }
-}
-let x = Math.random() < 0.5 ? 10 : "hello world!";
-x = 1;
-console.log(x);
-x = "goodbye!";
-console.log(x);
-function isFish(pet) {
-    return "swim" in pet;
-}
-console.log(isFish({ fly() {
-        null;
-    }, }));
+let someNever = 1;
